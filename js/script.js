@@ -5,7 +5,6 @@
     Muestra el precio sugerido con IVA del producto
 */
 
-let porcentajeDeGanancia = 0;
 const IVA = 0.21;
 
 function calcularIVA(costoProducto) {
@@ -26,7 +25,7 @@ function numeroCorrecto(precio) {
 function solicitarPreciosIngredientes() {
     let precioTotalIngredientes = 0;
     while (true) {
-        let textoIngresado = prompt("Ingrese el precio del ingrediente o SALIR para finalizar.");
+        let textoIngresado = prompt("Ingrese el precio del ingrediente (igual o mayor a 0) o SALIR para finalizar.");
         let precioIngrediente = parseFloat(textoIngresado);
         if (!numeroCorrecto(precioIngrediente)) {
             if (textoIngresado != "SALIR") {
@@ -43,7 +42,7 @@ function solicitarPreciosIngredientes() {
 
 function solicitarPorcentajeGanancia() {
     while (true) {
-        let porcentajeGanancia = parseFloat(prompt("Ingrese el precio del ingrediente o SALIR para finalizar."));
+        let porcentajeGanancia = parseFloat(prompt("Ingrese el porcentaje de ganancia (igual o mayor a 0)"));
         if (!numeroCorrecto(porcentajeGanancia)) {
             alert("Porcentaje ingresado incorrecto.");
             continue;
@@ -54,7 +53,30 @@ function solicitarPorcentajeGanancia() {
 
 function main() {
     let precioIngredientes = solicitarPreciosIngredientes();
-    let porcentajeDeGanancia = solicitarPorcentajeGanancia();
+    console.log(precioIngredientes)
+    let porcentajeDeGanancia = 0
+    let gananciaDelProducto = 0;
+    let precioSugeridoSinIVA = 0;
+    let ivaSobreSugerido = 0;
+    let precioSugeridoConIVA = 0;
 
 
+    if (!(precioIngredientes == 0)) {
+        porcentajeDeGanancia = solicitarPorcentajeGanancia();
+        gananciaDelProducto = calcularGanancia(precioIngredientes, porcentajeDeGanancia);
+        precioSugeridoSinIVA = precioIngredientes + gananciaDelProducto;
+        ivaSobreSugerido = calcularIVA(precioSugeridoSinIVA);
+        precioSugeridoConIVA = precioSugeridoSinIVA + ivaSobreSugerido;
+    }
+
+    alert(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
+        gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
+    console.log(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
+    gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
+
+    document.write(("<p class=\"calculo\"> Sobre un costo total de $" + precioIngredientes + ", se estable una ganancia del " + "% por un valor de $" +
+        gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos). </p>"));
+    document.write(("<p class=\"calculo\"> El precio sugerido final de venta es: $" + precioSugeridoConIVA + "</p>"));
 }
+
+main();

@@ -3,8 +3,16 @@
     padding: 0;
 }
 
-.titulo-pagina, .subtitulo-pagina {
+.titulo-pagina, .subtitulo-pagina, .calculo {
     text-align: center;
     margin: 1rem auto;
+}
+
+.instrucciones {
+    border: 1px dashed black;
+}
+
+.calculo {
+    margin: 2rem 0;
 }
 
