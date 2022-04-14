@@ -23,6 +23,7 @@ function numeroCorrecto(precio) {
 }
 
 function solicitarPreciosIngredientes() {
+    // Primer prompt solicita lista de precios de ingredientes
     let precioTotalIngredientes = 0;
     while (true) {
         let textoIngresado = prompt("Ingrese el precio del ingrediente (igual o mayor a 0) o SALIR para finalizar.");
@@ -41,6 +42,7 @@ function solicitarPreciosIngredientes() {
 }
 
 function solicitarPorcentajeGanancia() {
+    // Segundo prompt solicita el porcentaje de ganancia deseado
     while (true) {
         let porcentajeGanancia = parseFloat(prompt("Ingrese el porcentaje de ganancia (igual o mayor a 0)"));
         if (!numeroCorrecto(porcentajeGanancia)) {
@@ -52,6 +54,7 @@ function solicitarPorcentajeGanancia() {
 }
 
 function main() {
+    // Inicializo variables
     let precioIngredientes = solicitarPreciosIngredientes();
     console.log(precioIngredientes)
     let porcentajeDeGanancia = 0
@@ -61,6 +64,7 @@ function main() {
     let precioSugeridoConIVA = 0;
 
 
+    // Si el costo es 0 entonces no calcular el resto
     if (!(precioIngredientes == 0)) {
         porcentajeDeGanancia = solicitarPorcentajeGanancia();
         gananciaDelProducto = calcularGanancia(precioIngredientes, porcentajeDeGanancia);
@@ -69,6 +73,7 @@ function main() {
         precioSugeridoConIVA = precioSugeridoSinIVA + ivaSobreSugerido;
     }
 
+    // Muestro datos en Alert, en consola y en HTML
     alert(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
         gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
     console.log(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
