@@ -6,6 +6,12 @@
 */
 
 const IVA = 0.21;
+const preciosIngredientes = [];
+
+function Ingrediente(nombre, precio) {
+    this.nombre = nombre;
+    this.precio = precio;
+}
 
 function calcularIVA(costoProducto) {
     return costoProducto * IVA;
@@ -36,6 +42,7 @@ function solicitarPreciosIngredientes() {
                 break;
             }
         }
+        preciosIngredientes.push(precioIngrediente);
         precioTotalIngredientes += precioIngrediente;
     }
     return precioTotalIngredientes;
