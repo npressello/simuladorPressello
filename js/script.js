@@ -69,17 +69,18 @@ function main() {
         porcentajeDeGanancia = solicitarPorcentajeGanancia();
         gananciaDelProducto = calcularGanancia(precioIngredientes, porcentajeDeGanancia);
         precioSugeridoSinIVA = precioIngredientes + gananciaDelProducto;
-        ivaSobreSugerido = calcularIVA(precioSugeridoSinIVA);
+        ivaSobreSugerido = parseFloat(calcularIVA(precioSugeridoSinIVA).toFixed(2));
         precioSugeridoConIVA = precioSugeridoSinIVA + ivaSobreSugerido;
     }
 
     // Muestro datos en Alert, en consola y en HTML
     alert(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
         gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
+
     console.log(("Sobre un costo total de $" + precioIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
     gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
 
-    document.write(("<p class=\"calculo\"> Sobre un costo total de $" + precioIngredientes + ", se estable una ganancia del " + "% por un valor de $" +
+    document.write(("<p class=\"calculo\"> Sobre un costo total de $" + precioIngredientes + ", se estable una ganancia del " + porcentajeDeGanancia + "% por un valor de $" +
         gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos). </p>"));
     document.write(("<p class=\"calculo\"> El precio sugerido final de venta es: $" + precioSugeridoConIVA + "</p>"));
 }
