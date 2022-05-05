@@ -9,16 +9,45 @@
     <title>Desafio Simulador</title>
 </head>
 <body>
-    <div class="titulo">
-        <h1 class="titulo-pagina">Simulador de Precio Sugerido</h1>
-        <p class="subtitulo-pagina">Este programa sirve para calcular el precio sugerido de un producto gastronónmico en base al costo de los ingredientes y el porcentaje de ganancia deseado.</p>
-    </div>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="title-wrapper">
+                <img src="" alt="title">
+            </div>
+        </header>
+        
+        <section class="page-description">
+            <h1 class="title">Simulador de Precio Sugerido</h1>
+            <p class="subtitle">Este programa sirve para calcular el precio sugerido de un producto gastronónmico en base al costo de los ingredientes y el porcentaje de ganancia deseado.</p>
+        </section>
 
-    <div class="instrucciones">
-        <h2 class="titulo-pagina">Modo de uso</h2>
-        <p class="subtitulo-pagina">Primero ingrese los valores/costos de los ingredientes y al finalizar escriba SALIR.</p>
-        <p class="subtitulo-pagina">Luego ingrese el porcentaje de ganancia que desea (Ejemplo: 50%). Una vez realizado obtendra los calculos.</p>
+        <main class="content-wrapper">
+            <div class="instructions">
+                <h2 class="title">Modo de uso</h2>
+                <p class="subtitle">Primero ingrese los valores/costos de los ingredientes y al finalizar escriba SALIR.</p>
+                <p class="subtitle">Luego ingrese el porcentaje de ganancia que desea (Ejemplo: 50%). Una vez realizado obtendra los calculos.</p>
+            </div>
+
+            <div class="form-wrapper">
+                <form action="">
+                    <div class="product-price-pair">
+                        <label for="productName1">Nombre de producto: </label>
+                        <input type="text" name="productName1" id="productName-01">
+                        <label for="productQuantity1">Precio: </label>
+                        <input type="number" name="productPrice1" id="productPrice-01">
+                    </div>
+                    <button type="submit">Calcular</button>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p class="legal-format">Desarrollado por Nicolas Pressello - Trabajo final para <a href="https://www.coderhouse.com/">CoderHouse</a></p>
+        </footer>
     </div>
+    
+
+    
 
     <script src="js/script.js"></script>
 </body>
