@@ -3,19 +3,126 @@
     padding: 0;
 }
 
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
+:root {
+    --background-primary: #1d4b5c;
+    --text-primary: #f0e9e9;
+    --background-secondary: #296b83;
 }
 
+
+/* Typography*/
 .title, .subtitle, .calculation {
     text-align: center;
     margin: 1rem auto;
 }
 
-.instructions {
-    border: 1px dashed black;
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
 }
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--background-primary);
+    padding: 1rem 5rem;
+    border-bottom: 1px solid black;
+}
+
+.title-wrapper {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--text-primary);
+}
+
+.main-nav {
+    align-self: center;
+}
+
+.main-nav-element {
+    display: inline;
+    list-style: none;
+    margin: auto 0.5rem;
+}
+
+.main-nav-link {
+    text-decoration: none;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.main-nav-link:hover {
+    text-decoration: underline;
+}
+
+.page-description {
+    margin: 2.5rem 5rem;
+    font-size: 1.2rem;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.instructions {
+    margin: auto;
+    padding: 2rem;
+    max-width: 30%;
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 0.25em;
+}
+
+.form-wrapper {
+    margin: 0 auto;
+    max-width: 70%;
+}
+
+.product-setting, .product-price-pair, .button {
+    margin: 1rem auto;
+}
+
+.button {
+    text-align: center;
+}
+
+.footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    overflow: hidden;
+    background-color: var(--background-primary);
+    padding: 1rem 5rem;
+    color: var(--text-primary);
+}
+
+.coder-link {
+    padding: 0.25rem 0.75rem;
+    color: white;
+    background-color: var(--background-secondary);
+    border-radius: 0.25rem;
+}
+
+.coder-link:hover {
+    color: var(--background-secondary);
+    background-color: var(--text-primary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .calculation {
     margin: 2rem 0;

@@ -92,4 +92,4 @@ function main() {
     document.write(("<p class=\"calculation\"> El precio sugerido final de venta es: $" + precioSugeridoConIVA + "</p>"));
 }
 
-main();
+//main();
