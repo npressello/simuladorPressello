@@ -7,6 +7,7 @@
 
 const IVA = 0.21;
 const preciosIngredientes = [];
+let cantidadIngredientesAnterior = parseInt(document.getElementById("totalProducts").value);
 
 function Ingrediente(nombre, precio) {
     this.nombre = nombre;
@@ -73,23 +74,44 @@ function colocarResultadosEnHTML() {
 function crearFormIngredienteIndividual(numero) {
     let div = document.createElement("div");
     div.className = "product-price-pair";
-    div.innerHTML = `<label for=\"productName"+numero+"\">Nombre de producto: </label>
-        <input type=\"text\" name=\"productName"+numero+"\" id=\"productName"+numero+"\">
-        <label for=\"productQuantity"+numero+"\">Precio: </label>
-        <input type=\"number\" name=\"productPrice"+numero+"\" id=\"productPrice"+numero+"\">`;
+    div.innerHTML = `<label for="productName${numero}">Nombre de producto: </label>
+        <input type="text" name="productName${numero}" id="productName${numero}">
+        <label for="productQuantity${numero}">Precio: </label>
+        <input type="number" name="productPrice${numero}" id="productPrice${numero}">`;
     return div;
 }
 
 function actualizarCantidadIngredientes() {
-    let cantidad = parseInt(document.getElementById("totalProducts").value);    
+    let nuevaCantidadIngredientes = parseInt(document.getElementById("totalProducts").value);
+    if (nuevaCantidadIngredientes <= 0) {
+        document.getElementById("totalProducts").value = cantidadIngredientesAnterior;
+        return;
+    }
+        
+    let diferenciaCantidadIngredientes = nuevaCantidadIngredientes - cantidadIngredientesAnterior;
+    if (diferenciaCantidadIngredientes == 0) return;
+
     let form = document.getElementById("formContainer");
-    for (let i = 1; i <= cantidad; i++) {
-        let div = crearFormIngredienteIndividual();
-        form.appendChild(div);
+
+    if (diferenciaCantidadIngredientes > 0) {
+        for (let i = 1; i <= diferenciaCantidadIngredientes; i++) {
+            let div = crearFormIngredienteIndividual(i);
+            form.insertBefore(div, form.children[i]);
+        }
+    } else {
+        for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
+            console.log(cantidadIngredientesAnterior);   
+            console.log(nuevaCantidadIngredientes);
+            form.children[i].remove();
+        }
     }
 
+    cantidadIngredientesAnterior = nuevaCantidadIngredientes; 
+    
 }
 
+let inputCantidad = document.getElementById("totalProducts");
+inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
 colocarResultadosEnHTML();
 
 function main() {
