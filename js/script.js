@@ -57,6 +57,41 @@ function solicitarPorcentajeGanancia() {
     }
 }
 
+function colocarValorEnHTML(elemento, valor) {
+    let tag = document.getElementById(elemento);
+    tag.innerText = valor;
+}
+
+function colocarResultadosEnHTML() {
+    colocarValorEnHTML("ingrCost", ("$"+5));
+    colocarValorEnHTML("ivaCost", ("$"+5));
+    colocarValorEnHTML("ingrAndIVA", ("$"+5));
+    colocarValorEnHTML("profit", ("$"+5));
+    colocarValorEnHTML("totalPrice", ("$"+5));
+}
+
+function crearFormIngredienteIndividual(numero) {
+    let div = document.createElement("div");
+    div.className = "product-price-pair";
+    div.innerHTML = `<label for=\"productName"+numero+"\">Nombre de producto: </label>
+        <input type=\"text\" name=\"productName"+numero+"\" id=\"productName"+numero+"\">
+        <label for=\"productQuantity"+numero+"\">Precio: </label>
+        <input type=\"number\" name=\"productPrice"+numero+"\" id=\"productPrice"+numero+"\">`;
+    return div;
+}
+
+function actualizarCantidadIngredientes() {
+    let cantidad = parseInt(document.getElementById("totalProducts").value);    
+    let form = document.getElementById("formContainer");
+    for (let i = 1; i <= cantidad; i++) {
+        let div = crearFormIngredienteIndividual();
+        form.appendChild(div);
+    }
+
+}
+
+colocarResultadosEnHTML();
+
 function main() {
     // Inicializo variables
     solicitarPreciosIngredientes();
