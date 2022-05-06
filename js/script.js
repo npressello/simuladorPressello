@@ -71,6 +71,7 @@ function colocarResultadosEnHTML() {
     colocarValorEnHTML("totalPrice", ("$"+5));
 }
 
+/* Crea un input individual de ingredientes */
 function crearFormIngredienteIndividual(numero) {
     let div = document.createElement("div");
     div.className = "product-price-pair";
@@ -81,22 +82,24 @@ function crearFormIngredienteIndividual(numero) {
     return div;
 }
 
+
+/* Segun el numero de ingredientes elegido, actualiza la cantidad de inputs de ingredientes */
 function actualizarCantidadIngredientes() {
     let nuevaCantidadIngredientes = parseInt(document.getElementById("totalProducts").value);
     if (nuevaCantidadIngredientes <= 0) {
         document.getElementById("totalProducts").value = cantidadIngredientesAnterior;
         return;
     }
-        
+
     let diferenciaCantidadIngredientes = nuevaCantidadIngredientes - cantidadIngredientesAnterior;
     if (diferenciaCantidadIngredientes == 0) return;
 
     let form = document.getElementById("formContainer");
 
     if (diferenciaCantidadIngredientes > 0) {
-        for (let i = 1; i <= diferenciaCantidadIngredientes; i++) {
+        for (let i = cantidadIngredientesAnterior + 1; i <= nuevaCantidadIngredientes; i++) {
             let div = crearFormIngredienteIndividual(i);
-            form.insertBefore(div, form.children[i]);
+            form.insertBefore(div, form.children[i-1]);
         }
     } else {
         for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
