@@ -19,6 +19,7 @@
 .page-wrapper {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .header {
@@ -63,16 +64,7 @@
 .content-wrapper {
     display: flex;
     flex-direction: row;
-}
-
-.instructions {
-    margin: auto;
-    padding: 2rem;
-    max-width: 30%;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    border-radius: 0.25em;
+    flex-grow: 1;
 }
 
 .form-wrapper {
@@ -84,18 +76,57 @@
     margin: 1rem auto;
 }
 
+label:last-of-type {
+    margin-left: 2rem;
+}
+
 .button {
     text-align: center;
 }
 
+.result-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 30%;
+}
+
+.instructions {    
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 0.25em;
+}
+
+.instructions-text {
+    margin: 2rem 1rem;
+    font-weight: 500;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.result {
+    padding: 1rem;
+}
+
+.result-list {
+    list-style: inside;
+    list-style: circle;
+}
+
+.result-item {
+    margin: 0.5rem 0;
+    border-bottom: 1px dashed var(--background-secondary);
+}
+
+.result-value {
+    float: right;
+}
+
 .footer {
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-    overflow: hidden;
     background-color: var(--background-primary);
     padding: 1rem 5rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .coder-link {
@@ -108,23 +139,5 @@
 .coder-link:hover {
     color: var(--background-secondary);
     background-color: var(--text-primary);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.calculation {
-    margin: 2rem 0;
 }
 
