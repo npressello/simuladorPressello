@@ -47,7 +47,7 @@ function crearFormIngredienteIndividual(numero) {
     div.innerHTML = `<label for="productName${numero}">Nombre de producto: </label>
         <input type="text" name="productName${numero}" id="productName${numero}">
         <label for="productQuantity${numero}">Precio: </label>
-        <input type="number" name="productPrice${numero}" id="productPrice${numero} min="0"">`;
+        <input type="number" name="productPrice${numero}" id="productPrice${numero}" min="0">`;
     return div;
 }
 
@@ -84,7 +84,7 @@ function actualizarCantidadIngredientes() {
 function obtenerIngredienteIndividual(inputId) {
     let nombre = document.getElementById("productName"+inputId).value;
     let precio = parseFloat(document.getElementById("productPrice"+inputId).value);
-    if (precio < 0) {
+    if (!numeroCorrecto(precio)) {
         document.getElementById("productPrice"+inputId).value = 0;
         precio = 0;
     }
