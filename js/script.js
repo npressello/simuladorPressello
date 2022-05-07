@@ -5,8 +5,6 @@
     Muestra el precio sugerido con IVA del producto
 */
 
-const IVA = 0.21;
-const preciosIngredientes = [];
 let cantidadIngredientesAnterior = parseInt(document.getElementById("totalProducts").value);
 
 function Ingrediente(nombre, precio) {
@@ -14,8 +12,8 @@ function Ingrediente(nombre, precio) {
     this.precio = precio;
 }
 
-function calcularIVA(costoProducto) {
-    return costoProducto * IVA;
+function calcularIVA(costoProducto, IVA) {
+    return costoProducto * IVA / 100;
 }
 
 function calcularGanancia(costoProducto, porcentajeGanancia) {
@@ -29,46 +27,17 @@ function numeroCorrecto(precio) {
     else return false;
 }
 
-function solicitarPreciosIngredientes() {
-    // Primer prompt solicita lista de precios de ingredientes y los guarda en el array de precios
-    while (true) {
-        let textoIngresado = prompt("Ingrese el precio del ingrediente (igual o mayor a 0) o SALIR para finalizar.");
-        let precioIngrediente = parseFloat(textoIngresado);
-        if (!numeroCorrecto(precioIngrediente)) {
-            if (textoIngresado != "SALIR") {
-                alert("Texto/Precio ingresado incorrecto.")
-                continue;
-            } else {
-                break;
-            }
-        }
-        preciosIngredientes.push(precioIngrediente);
-    }
-}
-
-function solicitarPorcentajeGanancia() {
-    // Segundo prompt solicita el porcentaje de ganancia deseado
-    while (true) {
-        let porcentajeGanancia = parseFloat(prompt("Ingrese el porcentaje de ganancia (igual o mayor a 0)"));
-        if (!numeroCorrecto(porcentajeGanancia)) {
-            alert("Porcentaje ingresado incorrecto.");
-            continue;
-        }
-        return porcentajeGanancia;
-    }
-}
-
 function colocarValorEnHTML(elemento, valor) {
     let tag = document.getElementById(elemento);
     tag.innerText = valor;
 }
 
-function colocarResultadosEnHTML() {
-    colocarValorEnHTML("ingrCost", ("$"+5));
-    colocarValorEnHTML("ivaCost", ("$"+5));
-    colocarValorEnHTML("ingrAndIVA", ("$"+5));
-    colocarValorEnHTML("profit", ("$"+5));
-    colocarValorEnHTML("totalPrice", ("$"+5));
+function colocarResultadosEnHTML(costoIngredientes, ganancia, sugeridoSinIva, iva, final) {
+    colocarValorEnHTML("ingrCost", ("$"+costoIngredientes));
+    colocarValorEnHTML("profit", ("$"+ganancia));
+    colocarValorEnHTML("costAndProfit", ("$"+sugeridoSinIva));
+    colocarValorEnHTML("ivaCost", ("$"+iva));
+    colocarValorEnHTML("totalPrice", ("$"+final));
 }
 
 /* Crea un input individual de ingredientes */
@@ -78,7 +47,7 @@ function crearFormIngredienteIndividual(numero) {
     div.innerHTML = `<label for="productName${numero}">Nombre de producto: </label>
         <input type="text" name="productName${numero}" id="productName${numero}">
         <label for="productQuantity${numero}">Precio: </label>
-        <input type="number" name="productPrice${numero}" id="productPrice${numero}">`;
+        <input type="number" name="productPrice${numero}" id="productPrice${numero} min="0"">`;
     return div;
 }
 
@@ -109,47 +78,76 @@ function actualizarCantidadIngredientes() {
         }
     }
 
-    cantidadIngredientesAnterior = nuevaCantidadIngredientes; 
-    
+    cantidadIngredientesAnterior = nuevaCantidadIngredientes;     
 }
 
-let inputCantidad = document.getElementById("totalProducts");
-inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
-colocarResultadosEnHTML();
+function obtenerIngredienteIndividual(inputId) {
+    let nombre = document.getElementById("productName"+inputId).value;
+    let precio = parseFloat(document.getElementById("productPrice"+inputId).value);
+    if (precio < 0) {
+        document.getElementById("productPrice"+inputId).value = 0;
+        precio = 0;
+    }
+    const ingrediente = new Ingrediente(nombre, precio);
+    return ingrediente;
+}
 
-function main() {
-    // Inicializo variables
-    solicitarPreciosIngredientes();
-    let precioTotalIngredientes = 0;
+function obtenerIngredientes(cantidad) {
+    const ingredientes = [];
 
-    precioTotalIngredientes = preciosIngredientes.reduce((acc, el) => acc + el, 0);
-    
-    let porcentajeDeGanancia = 0
-    let gananciaDelProducto = 0;
-    let precioSugeridoSinIVA = 0;
-    let ivaSobreSugerido = 0;
-    let precioSugeridoConIVA = 0;
-
-
-    // Si el costo es 0 entonces no calcular el resto
-    if (!(precioTotalIngredientes == 0)) {
-        porcentajeDeGanancia = solicitarPorcentajeGanancia();
-        gananciaDelProducto = calcularGanancia(precioTotalIngredientes, porcentajeDeGanancia);
-        precioSugeridoSinIVA = precioTotalIngredientes + gananciaDelProducto;
-        ivaSobreSugerido = parseFloat(calcularIVA(precioSugeridoSinIVA).toFixed(2));
-        precioSugeridoConIVA = precioSugeridoSinIVA + ivaSobreSugerido;
+    for (let i = 0; i < cantidad; i++) {
+        ingredientes.push(obtenerIngredienteIndividual(i+1));
     }
 
-    // Muestro datos en Alert, en consola y en HTML
-    alert(("Sobre un costo total de $" + precioTotalIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
-        gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
-
-    console.log(("Sobre un costo total de $" + precioTotalIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" + 
-    gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos).\nEl precio sugerido final de venta es: $" + precioSugeridoConIVA));
-
-    document.write(("<p class=\"calculation\"> Sobre un costo total de $" + precioTotalIngredientes + ", se establece una ganancia del " + porcentajeDeGanancia + "% por un valor de $" +
-        gananciaDelProducto + " y $" + ivaSobreSugerido + " de IVA (21% del precio sin impuestos). </p>"));
-    document.write(("<p class=\"calculation\"> El precio sugerido final de venta es: $" + precioSugeridoConIVA + "</p>"));
+    return ingredientes;
 }
 
-//main();
+function obtenerIVA() {
+    let iva = parseFloat(document.getElementById("iva").value);
+    if (iva < 0) {
+        document.getElementById("iva").value = 0;
+        iva = 0;
+    }
+    return iva;
+}
+
+function obtenerPorcentajeGanancia() {
+    let porcentaje = parseFloat(document.getElementById("profitPercent").value);
+    if (porcentaje < 0) {
+        document.getElementById("profitPercent").value = 0;
+        porcentaje = 0;
+    }
+    return porcentaje;
+}
+
+function simular(e) {
+    e.preventDefault();
+
+    // Obtengo informacion de ingredientes y sumo los precios
+    let ingredientes = obtenerIngredientes(cantidadIngredientesAnterior);    
+    let costoTotalIngredientes = ingredientes.reduce((acc, el) => acc + el.precio, 0);
+    console.log(costoTotalIngredientes);
+
+    let ganancia = calcularGanancia(costoTotalIngredientes, obtenerPorcentajeGanancia());
+    console.log(ganancia);
+    let sugeridoSinIva = costoTotalIngredientes + ganancia;
+    console.log(sugeridoSinIva);
+
+    let iva = parseFloat(calcularIVA(sugeridoSinIva, obtenerIVA()).toFixed(2));
+    console.log(iva);
+    precioSugeridoFinal = sugeridoSinIva + iva;
+    console.log(precioSugeridoFinal);
+
+    colocarResultadosEnHTML(costoTotalIngredientes, ganancia, sugeridoSinIva, iva, precioSugeridoFinal);
+}
+
+function main() {
+
+    let inputCantidad = document.getElementById("totalProducts");
+    inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
+
+    let btnCalcular = document.getElementById("btnCalculate");
+    btnCalcular.addEventListener("click", simular);
+}
+
+main();

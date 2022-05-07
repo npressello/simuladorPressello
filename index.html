@@ -39,23 +39,23 @@
                         <label for="productName1">Nombre de producto: </label>
                         <input type="text" name="productName1" id="productName1">
                         <label for="productQuantity1">Precio: </label>
-                        <input type="number" name="productPrice1" id="productPrice1">
+                        <input type="number" name="productPrice1" id="productPrice1" min="0">
                     </div>
                     <div class="product-price-pair">
                         <label for="productName2">Nombre de producto: </label>
                         <input type="text" name="productName2" id="productName2">
                         <label for="productQuantity2">Precio: </label>
-                        <input type="number" name="productPrice2" id="productPrice2">
+                        <input type="number" name="productPrice2" id="productPrice2" min="0">
                     </div>
 
                     <div class="product-price-pair">
                         <label for="iva">IVA: </label>
-                        <input type="text" name="iva" id="iva">
+                        <input type="number" name="iva" id="iva" min="0">
                         <label for="profitPercent">Procentaje Ganancia: </label>
-                        <input type="number" name="profitPercent" id="profitPercent">
+                        <input type="number" name="profitPercent" id="profitPercent" min="0">
                     </div>
                     <div class="button">
-                        <button type="submit" id="btn-calculate">Calcular</button>
+                        <button type="submit" id="btnCalculate">Calcular</button>
                     </div>                    
                 </form>
             </div>
@@ -71,10 +71,10 @@
                 <div class="result">
                     <ul class="result-list">
                         <li class="result-item">Costo total de ingredientes: <span id="ingrCost" class="result-value">$0</span> </li>
-                        <li class="result-item">IVA: <span id="ivaCost" class="result-value">$0</span></li>
-                        <li class="result-item">Ingredientes más IVA: <span id="ingrAndIVA" class="result-value">$0</span></li>
                         <li class="result-item">Ganancia: <span id="profit" class="result-value">$0</span></li>
-                        <li class="result-item">Precio sugerido: <span id="totalPrice" class="result-value">$0</span></li>
+                        <li class="result-item">Sugerido sin IVA: <span id="costAndProfit" class="result-value">$0</span></li>
+                        <li class="result-item">IVA: <span id="ivaCost" class="result-value">$0</span></li>
+                        <li class="result-item">Precio sugerido final: <span id="totalPrice" class="result-value">$0</span></li>
                     </ul>
                 </div>
             </aside>
