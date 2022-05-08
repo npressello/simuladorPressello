@@ -5,15 +5,20 @@
     Muestra el precio sugerido con IVA del producto
 */
 
+// Mantiene en memoria la cantidad de ingredientes anterior a la modificacion
+// del formulario para hacer los calculos y actualizar acorde
 let cantidadIngredientesAnterior = parseInt(document.getElementById("totalProducts").value);
 
+// Objeto
 function Ingrediente(nombre, precio) {
     this.nombre = nombre;
     this.precio = precio;
 }
 
+
+// Funciones auxiliares de calculo
 function calcularIVA(costoProducto, IVA) {
-    return costoProducto * IVA / 100;
+    return costoProducto * IVA / 100.0;
 }
 
 function calcularGanancia(costoProducto, porcentajeGanancia) {
@@ -21,12 +26,16 @@ function calcularGanancia(costoProducto, porcentajeGanancia) {
     return costoProducto * (porcentajeGanancia / 100.0); 
 }
 
+
+// Validacion de costo o porcentaje
 function numeroCorrecto(precio) {
     // Valido si el precio ingresado es un numero correcto
     if (!isNaN(precio) && precio != null && precio != "" && precio >= 0) return true;
     else return false;
 }
 
+
+// Funciones de salida
 function colocarValorEnHTML(elemento, valor) {
     let tag = document.getElementById(elemento);
     tag.innerText = valor;
@@ -40,6 +49,7 @@ function colocarResultadosEnHTML(costoIngredientes, ganancia, sugeridoSinIva, iv
     colocarValorEnHTML("totalPrice", ("$"+final));
 }
 
+
 /* Crea un input individual de ingredientes */
 function crearFormIngredienteIndividual(numero) {
     let div = document.createElement("div");
@@ -50,7 +60,6 @@ function crearFormIngredienteIndividual(numero) {
         <input type="number" name="productPrice${numero}" id="productPrice${numero}" min="0">`;
     return div;
 }
-
 
 /* Segun el numero de ingredientes elegido, actualiza la cantidad de inputs de ingredientes */
 function actualizarCantidadIngredientes() {
@@ -81,6 +90,8 @@ function actualizarCantidadIngredientes() {
     cantidadIngredientesAnterior = nuevaCantidadIngredientes;     
 }
 
+
+// Recopilo info ingrediente y genero objeto
 function obtenerIngredienteIndividual(inputId) {
     let nombre = document.getElementById("productName"+inputId).value;
     let precio = parseFloat(document.getElementById("productPrice"+inputId).value);
@@ -92,6 +103,7 @@ function obtenerIngredienteIndividual(inputId) {
     return ingrediente;
 }
 
+// Genero array de ingredientes
 function obtenerIngredientes(cantidad) {
     const ingredientes = [];
 
@@ -104,7 +116,7 @@ function obtenerIngredientes(cantidad) {
 
 function obtenerIVA() {
     let iva = parseFloat(document.getElementById("iva").value);
-    if (iva < 0) {
+    if (!numeroCorrecto(iva)) {
         document.getElementById("iva").value = 0;
         iva = 0;
     }
@@ -113,13 +125,15 @@ function obtenerIVA() {
 
 function obtenerPorcentajeGanancia() {
     let porcentaje = parseFloat(document.getElementById("profitPercent").value);
-    if (porcentaje < 0) {
+    if (!numeroCorrecto(porcentaje)) {
         document.getElementById("profitPercent").value = 0;
         porcentaje = 0;
     }
     return porcentaje;
 }
 
+
+// Funcion principal de simulacion
 function simular(e) {
     e.preventDefault();
 
@@ -138,14 +152,19 @@ function simular(e) {
     precioSugeridoFinal = sugeridoSinIva + iva;
     console.log(precioSugeridoFinal);
 
+    // Muestro salida al HTML
     colocarResultadosEnHTML(costoTotalIngredientes, ganancia, sugeridoSinIva, iva, precioSugeridoFinal);
 }
 
+
+// Puerta de entrada al programa
 function main() {
 
+    // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
     inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
 
+    // Evento de simulacion de precios
     let btnCalcular = document.getElementById("btnCalculate");
     btnCalcular.addEventListener("click", simular);
 }

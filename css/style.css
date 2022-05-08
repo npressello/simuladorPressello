@@ -7,6 +7,7 @@
     --background-primary: #1d4b5c;
     --text-primary: #f0e9e9;
     --background-secondary: #296b83;
+    --background-complementary: #b15c38;
 }
 
 
@@ -84,11 +85,18 @@ label:last-of-type {
     text-align: center;
 }
 
+.sticky {
+    height: 25vh;
+    max-width: 30%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
 .result-wrapper {
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    max-width: 30%;
 }
 
 .instructions {    
@@ -132,7 +140,7 @@ label:last-of-type {
 .coder-link {
     padding: 0.25rem 0.75rem;
     color: white;
-    background-color: var(--background-secondary);
+    background-color: var(--background-complementary);
     border-radius: 0.25rem;
 }
 
