@@ -148,19 +148,14 @@ function simular(e) {
     // Obtengo informacion de ingredientes y sumo los precios
     let ingredientes = obtenerIngredientes(cantidadIngredientesAnterior);    
     let costoTotalIngredientes = ingredientes.reduce((acc, el) => acc + el.precio, 0);
-    console.log(costoTotalIngredientes);
 
     let porcentajeDeGanancia = obtenerPorcentajeGanancia();
     let ganancia = calcularGanancia(costoTotalIngredientes, porcentajeDeGanancia);
-    console.log(ganancia);
     let sugeridoSinIva = costoTotalIngredientes + ganancia;
-    console.log(sugeridoSinIva);
 
     let porcentajeIva = obtenerIVA();
     let iva = parseFloat(calcularIVA(sugeridoSinIva, porcentajeIva).toFixed(2));
-    console.log(iva);
     let precioSugeridoFinal = parseFloat((sugeridoSinIva + iva).toFixed(2));
-    console.log(precioSugeridoFinal);
 
     // Muestro salida al HTML
     colocarResultadosEnHTML(costoTotalIngredientes, ganancia, sugeridoSinIva, iva, precioSugeridoFinal);
@@ -169,15 +164,32 @@ function simular(e) {
     guardar(cantidadIngredientesAnterior, ingredientes, porcentajeIva, porcentajeDeGanancia);
 }
 
-function cargar() {
+function cargar(btnCalcular) {
+    // Cargo cantidad de ingredientes y actualizo form
+    let cantIngredientes = localStorage.getItem('cantIngredientes');
+    if (cantIngredientes == null) return false;
+    document.getElementById("totalProducts").value = cantIngredientes;
+    actualizarCantidadIngredientes();
+
+    // Cargo lista ingredientes
+    let ingredientes = JSON.parse(localStorage.getItem('listaIngredientes'));
+    for (let i = 0; i < ingredientes.length; i++) {
+        document.getElementById("productName"+(i+1)).value = ingredientes[i].nombre;
+        document.getElementById("productPrice"+(i+1)).value = ingredientes[i].precio;
+    }
+
+    // Cargo porcentaje iva y ganancia
+    let porcentajeIva = localStorage.getItem('porcentajeIva');
+    document.getElementById("iva").value = porcentajeIva;
+    let porcentajeDeGanancia = localStorage.getItem('porcentajeDeGanancia');
+    document.getElementById("profitPercent").value = porcentajeDeGanancia;
+
+    btnCalcular.dispatchEvent(new Event("click"));
     return;
 }
 
 // Puerta de entrada al programa
-function main() {
-    // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
-    cargar();
-
+function main() {  
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
     inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
@@ -185,6 +197,9 @@ function main() {
     // Evento de simulacion de precios
     let btnCalcular = document.getElementById("btnCalculate");
     btnCalcular.addEventListener("click", simular);
+
+    // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
+    cargar(btnCalcular);
 }
 
 main();
