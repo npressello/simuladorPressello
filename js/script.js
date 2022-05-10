@@ -1,3 +1,4 @@
+'use strict';
 /*
     Suma los valores costos de los ingredientes del usuario
     Consulta el porcentaje de ganancia
@@ -133,6 +134,13 @@ function obtenerPorcentajeGanancia() {
 }
 
 
+function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porcentajeDeGanancia) {
+    localStorage.setItem('cantIngredientes', cantIngredientes);
+    localStorage.setItem('listaIngredientes', JSON.stringify(listaIngredientes));
+    localStorage.setItem('porcentajeIva', porcentajeIva);
+    localStorage.setItem('porcentajeDeGanancia', porcentajeDeGanancia);
+}
+
 // Funcion principal de simulacion
 function simular(e) {
     e.preventDefault();
@@ -142,23 +150,33 @@ function simular(e) {
     let costoTotalIngredientes = ingredientes.reduce((acc, el) => acc + el.precio, 0);
     console.log(costoTotalIngredientes);
 
-    let ganancia = calcularGanancia(costoTotalIngredientes, obtenerPorcentajeGanancia());
+    let porcentajeDeGanancia = obtenerPorcentajeGanancia();
+    let ganancia = calcularGanancia(costoTotalIngredientes, porcentajeDeGanancia);
     console.log(ganancia);
     let sugeridoSinIva = costoTotalIngredientes + ganancia;
     console.log(sugeridoSinIva);
 
-    let iva = parseFloat(calcularIVA(sugeridoSinIva, obtenerIVA()).toFixed(2));
+    let porcentajeIva = obtenerIVA();
+    let iva = parseFloat(calcularIVA(sugeridoSinIva, porcentajeIva).toFixed(2));
     console.log(iva);
-    precioSugeridoFinal = sugeridoSinIva + iva;
+    let precioSugeridoFinal = parseFloat((sugeridoSinIva + iva).toFixed(2));
     console.log(precioSugeridoFinal);
 
     // Muestro salida al HTML
     colocarResultadosEnHTML(costoTotalIngredientes, ganancia, sugeridoSinIva, iva, precioSugeridoFinal);
+
+    // Guardo en archivo la ultima simulacion
+    guardar(cantidadIngredientesAnterior, ingredientes, porcentajeIva, porcentajeDeGanancia);
 }
 
+function cargar() {
+    return;
+}
 
 // Puerta de entrada al programa
 function main() {
+    // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
+    cargar();
 
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
