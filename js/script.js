@@ -31,8 +31,7 @@ function calcularGanancia(costoProducto, porcentajeGanancia) {
 // Validacion de costo o porcentaje
 function numeroCorrecto(precio) {
     // Valido si el precio ingresado es un numero correcto
-    if (!isNaN(precio) && precio != null && precio != "" && precio >= 0) return true;
-    else return false;
+    return (!isNaN(precio) && precio != null && precio != "" && precio >= 0);
 }
 
 
@@ -75,12 +74,13 @@ function actualizarCantidadIngredientes() {
 
     let form = document.getElementById("formContainer");
 
+    // Si la diferencia es positiva agrega inputs de ingrediente
     if (diferenciaCantidadIngredientes > 0) {
         for (let i = cantidadIngredientesAnterior + 1; i <= nuevaCantidadIngredientes; i++) {
             let div = crearFormIngredienteIndividual(i);
             form.insertBefore(div, form.children[i-1]);
         }
-    } else {
+    } else { // Sino elimina inputs de ingredientes
         for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
             console.log(cantidadIngredientesAnterior);   
             console.log(nuevaCantidadIngredientes);
@@ -134,6 +134,7 @@ function obtenerPorcentajeGanancia() {
 }
 
 
+// Guarda la ultima simulacion
 function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porcentajeDeGanancia) {
     localStorage.setItem('cantIngredientes', cantIngredientes);
     localStorage.setItem('listaIngredientes', JSON.stringify(listaIngredientes));
