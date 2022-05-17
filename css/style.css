@@ -149,3 +149,7 @@ label:last-of-type {
     background-color: var(--text-primary);
 }
 
+/* Toast style */
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}

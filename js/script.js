@@ -10,6 +10,18 @@
 // del formulario para hacer los calculos y actualizar acorde
 let cantidadIngredientesAnterior = parseInt(document.getElementById("totalProducts").value);
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true
+})
+
 // Objeto
 function Ingrediente(nombre, precio) {
     this.nombre = nombre;
@@ -135,11 +147,17 @@ function obtenerPorcentajeGanancia() {
 
 
 // Guarda la ultima simulacion
-function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porcentajeDeGanancia) {
+async function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porcentajeDeGanancia) {
     localStorage.setItem('cantIngredientes', cantIngredientes);
     localStorage.setItem('listaIngredientes', JSON.stringify(listaIngredientes));
     localStorage.setItem('porcentajeIva', porcentajeIva);
     localStorage.setItem('porcentajeDeGanancia', porcentajeDeGanancia);
+
+    
+    await Toast.fire({
+        icon: 'success',
+        title: 'Simulación guardada'
+    })
 }
 
 // Funcion principal de simulacion
