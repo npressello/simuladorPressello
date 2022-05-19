@@ -1,0 +1,10 @@
+[
+    {"nombre": "Manteca", "precio": 230, "cantidad": 200, "unidad": "gramo", "id": 1 },
+    {"nombre": "Chocolate Amargo", "precio": 305, "cantidad": 90, "unidad": "gramo", "id": 2 },
+    {"nombre": "Huevo", "precio": 129, "cantidad": 6, "unidad": "unidad", "id": 3 },
+    {"nombre": "Azucar blanca", "precio": 143, "cantidad": 1000, "unidad": "gramo", "id": 4 },
+    {"nombre": "Cacao", "precio": 250, "cantidad": 150, "unidad": "gramo", "id": 5 },
+    {"nombre": "Esencia de Vainilla", "precio": 203, "cantidad": 100, "unidad": "mililitros", "id": 6 },
+    {"nombre": "Harina de Trigo", "precio": 230, "cantidad": 200, "unidad": "gramo", "id": 7 },
+    {"nombre": "Nueces", "precio": 165, "cantidad": 50, "unidad": "gramo", "id": 8 }
+]

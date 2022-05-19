@@ -96,7 +96,7 @@ label:last-of-type {
 .result-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem 2rem;
 }
 
 .instructions {    
