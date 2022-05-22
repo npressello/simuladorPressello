@@ -30,6 +30,13 @@
 
         <main class="content-wrapper">
             <div class="form-wrapper" id="form-wrapper">
+                <div class="recipe-selector">
+                    <label for="recipes">Elegí una receta</label>
+                    <select name="recipes" id="recipes">
+                        <option value="brownie">Brownie</option>                        
+                    </select>
+                    <button type="submit" id="btnRecipe">Cargar</button>
+                </div>
                 <div class="product-setting">
                     <label for="totalProducts">Cantidad de ingredientes: </label>
                     <input type="number" name="totalProducts" id="totalProducts" value="2" min="1">
