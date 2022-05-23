@@ -207,8 +207,20 @@ function cargar(btnCalcular) {
     return;
 }
 
+async function cargarReceta(nombreReceta) {
+  let url = 'https://preciosugerido.netlify.app/data/' + nombreReceta + '.json';
+  console.log(url);
+
+  const resp = await fetch(url);
+  const data = await resp.json();
+
+  return data;
+}
+
 // Puerta de entrada al programa
 function main() {  
+  let data = cargarReceta("ingredientes");
+  console.log(data);
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
     inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
