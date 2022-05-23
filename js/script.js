@@ -221,6 +221,10 @@ async function cargarReceta(nombreReceta) {
 function main() {  
   let data = cargarReceta("ingredientes");
   console.log(data);
+
+  data.foreach((ingrediente) => {
+    console.log("Nombre: "+ingrediente.nombre);
+  })
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
     inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
