@@ -219,7 +219,7 @@ async function cargarReceta(nombreReceta) {
 
 // Puerta de entrada al programa
 function main() {  
-  let data = cargarReceta("ingredientes");
+  let data = await cargarReceta("ingredientes");
   console.log(data);
 
   data.forEach((ingrediente) => {
