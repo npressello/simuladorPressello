@@ -222,7 +222,7 @@ function main() {
   let data = cargarReceta("ingredientes");
   console.log(data);
 
-  data.foreach((ingrediente) => {
+  data.forEach((ingrediente) => {
     console.log("Nombre: "+ingrediente.nombre);
   })
     // Evento de actualizacion de formulario segun cantidad de ingredientes
