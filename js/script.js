@@ -207,7 +207,8 @@ function cargar(btnCalcular) {
     return;
 }
 
-async function cargarReceta(nombreReceta) {
+async function cargarReceta() {
+  let nombreReceta = document.getElementById("recipes").value.toLowerCase();
   let url = 'https://preciosugerido.netlify.app/data/' + nombreReceta + '.json';
   console.log(url);
 
@@ -224,7 +225,7 @@ async function cargarReceta(nombreReceta) {
 // Puerta de entrada al programa
 async function main() {  
   let btnCargaReceta = document.getElementById("btnRecipe");
-  btnRecipe.addEventListener("click", cargarReceta(document.getElementById("recipes").value.toLowerCase()));
+  btnRecipe.addEventListener("click", cargarReceta);
   
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
