@@ -214,17 +214,18 @@ async function cargarReceta(nombreReceta) {
   const resp = await fetch(url);
   const data = await resp.json();
 
+  data.forEach((ingrediente) => {
+    console.log("Nombre: "+ingrediente.nombre+" Precio: "+ingrediente.precio);
+  })
+
   return data;
 }
 
 // Puerta de entrada al programa
 async function main() {  
-  let data = await cargarReceta("ingredientes");
-  console.log(data);
-
-  data.forEach((ingrediente) => {
-    console.log("Nombre: "+ingrediente.nombre);
-  })
+  let btnCargaReceta = document.getElementById("btnRecipe");
+  btnRecipe.addEventListener("click", cargarReceta(document.getElementById("recipes").value.toLowerCase()));
+  
     // Evento de actualizacion de formulario segun cantidad de ingredientes
     let inputCantidad = document.getElementById("totalProducts");
     inputCantidad.onchange = () => {actualizarCantidadIngredientes()};
