@@ -1,104 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
-    <title>Desafio Simulador</title>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Desafio Simulador</title>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="header" id="header">
-            <div class="title-wrapper">
-                <h2 class="logo-title">Simulador de Precio Sugerido</h2>
-            </div>
-            <nav class="main-nav">
-                <ul class="main-nav-list">
-                    <li class="main-nav-element"><a class="main-nav-link" href="#header">Inicio</a></li>
-                    <li class="main-nav-element"><a class="main-nav-link" href="#form-wrapper">Simulador</a></li>
-                    <li class="main-nav-element"><a class="main-nav-link" href="#footer">Contacto</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <section class="page-description">
-            <h1 class="title">Simulador de Precio Sugerido</h1>
-            <p class="subtitle">Este programa sirve para calcular el precio sugerido de un producto gastronómico en base al costo de los ingredientes y el porcentaje de ganancia deseado.</p>
-        </section>
+  <div class="page-wrapper">
+    <header class="header" id="header">
+      <div class="title-wrapper">
+        <h2 class="logo-title">Simulador de Precio Sugerido</h2>
+      </div>
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li class="main-nav-element"><a class="main-nav-link" href="#header">Inicio</a></li>
+          <li class="main-nav-element"><a class="main-nav-link" href="#form-wrapper">Simulador</a></li>
+          <li class="main-nav-element"><a class="main-nav-link" href="#footer">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+      
+    <section class="page-description">
+      <h1 class="title">Simulador de Precio Sugerido</h1>
+      <p class="subtitle">Este programa sirve para calcular el precio sugerido de un producto gastronómico en base al costo de los ingredientes y el porcentaje de ganancia deseado.</p>
+    </section>
 
-        <main class="content-wrapper">
-            <div class="form-wrapper" id="form-wrapper">
-                <div class="recipe-selector">
-                    <label for="recipes">Elegí una receta</label>
-                    <select name="recipes" id="recipes">
-                        <option value="brownie">Brownie</option>                        
-                    </select>
-                    <button type="submit" id="btnRecipe">Cargar</button>
-                </div>
-                <div class="product-setting">
-                    <label for="totalProducts">Cantidad de ingredientes: </label>
-                    <input type="number" name="totalProducts" id="totalProducts" value="2" min="1">
-                </div>
-                <form id="formContainer" class="form" action="">
-                    <div class="product-price-pair">
-                        <label for="productName1">Nombre de producto: </label>
-                        <input type="text" name="productName1" id="productName1">
-                        <label for="productQuantity1">Precio: </label>
-                        <input type="number" name="productPrice1" id="productPrice1" min="0">
-                    </div>
-                    <div class="product-price-pair">
-                        <label for="productName2">Nombre de producto: </label>
-                        <input type="text" name="productName2" id="productName2">
-                        <label for="productQuantity2">Precio: </label>
-                        <input type="number" name="productPrice2" id="productPrice2" min="0">
-                    </div>
+    <main class="content-wrapper">
+      <div class="form-wrapper" id="form-wrapper">
+        <div class="recipe-selector">
+          <label for="recipes">Elegí una receta</label>
+          <select name="recipes" id="recipes">
+            <option value="brownie">Brownie</option>                        
+          </select>
+          <button type="submit" id="btnRecipe">Cargar</button>
+        </div>
+        <div class="product-setting">
+          <label for="totalProducts">Cantidad de ingredientes: </label>
+          <input type="number" name="totalProducts" id="totalProducts" value="2" min="1">
+        </div>
+        <form id="formContainer" class="form" action="">
+          <div class="product-price-pair">
+            <label for="productName1">Nombre de producto: </label>
+            <input type="text" name="productName1" id="productName1">
+            <label for="productQuantity1">Precio: </label>
+            <input type="number" name="productPrice1" id="productPrice1" min="0">
+          </div>
+          <div class="product-price-pair">
+            <label for="productName2">Nombre de producto: </label>
+            <input type="text" name="productName2" id="productName2">
+            <label for="productQuantity2">Precio: </label>
+            <input type="number" name="productPrice2" id="productPrice2" min="0">
+          </div>
 
-                    <div class="product-price-pair">
-                        <label for="iva">IVA: </label>
-                        <input type="number" name="iva" id="iva" min="0">
-                        <label for="profitPercent">Procentaje Ganancia: </label>
-                        <input type="number" name="profitPercent" id="profitPercent" min="0">
-                    </div>
-                    <div class="button">
-                        <button type="submit" id="btnCalculate">Calcular</button>
-                    </div>                    
-                </form>
-            </div>
+          <div class="product-price-pair">
+            <label for="iva">IVA: </label>
+            <input type="number" name="iva" id="iva" min="0">
+            <label for="profitPercent">Procentaje Ganancia: </label>
+            <input type="number" name="profitPercent" id="profitPercent" min="0">
+          </div>
+          <div class="button">
+            <button type="submit" id="btnCalculate">Calcular</button>
+          </div>                    
+        </form>
+      </div>
 
-            <div class="sticky">
-                <aside class="result-wrapper">
-                    <div class="instructions">
-                        <h2 class="title">Modo de uso</h2>
-                        <p class="instructions-text">Ingrese la cantidad de ingredientes utilizados.</p>
-                        <p class="instructions-text">Coloque el nombre y el costo de cada uno.</p>
-                        <p class="instructions-text">Luego ingrese el porcentaje de IVA y ganancia que desea (Ejemplo: 50%). Click en calcular para obtener el resultado.</p>
-                    </div>
-    
-                    <div class="result">
-                        <ul class="result-list">
-                            <li class="result-item">Costo total de ingredientes: <span id="ingrCost" class="result-value">$0</span> </li>
-                            <li class="result-item">Ganancia: <span id="profit" class="result-value">$0</span></li>
-                            <li class="result-item">Sugerido sin IVA: <span id="costAndProfit" class="result-value">$0</span></li>
-                            <li class="result-item">IVA: <span id="ivaCost" class="result-value">$0</span></li>
-                            <li class="result-item">Precio sugerido final: <span id="totalPrice" class="result-value">$0</span></li>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
-            
-        </main>
+      <div class="sticky">
+          <aside class="result-wrapper">
+              <div class="instructions">
+                  <h2 class="title">Modo de uso</h2>
+                  <p class="instructions-text">Ingrese la cantidad de ingredientes utilizados.</p>
+                  <p class="instructions-text">Coloque el nombre y el costo de cada uno.</p>
+                  <p class="instructions-text">Luego ingrese el porcentaje de IVA y ganancia que desea (Ejemplo: 50%). Click en calcular para obtener el resultado.</p>
+              </div>
 
-        <footer class="footer" id="footer">
-            <p class="legal-format">Desarrollado por Nicolas Pressello - Trabajo final para <a class="coder-link" href="https://www.coderhouse.com/">CoderHouse</a> - Ver proyecto en <a class="coder-link" href="https://github.com/npressello/simuladorPressello"> GITHUB</a></p>
-        </footer>
-    </div>
-    
+              <div class="result">
+                  <ul class="result-list">
+                      <li class="result-item">Costo total de ingredientes: <span id="ingrCost" class="result-value">$0</span> </li>
+                      <li class="result-item">Ganancia: <span id="profit" class="result-value">$0</span></li>
+                      <li class="result-item">Sugerido sin IVA: <span id="costAndProfit" class="result-value">$0</span></li>
+                      <li class="result-item">IVA: <span id="ivaCost" class="result-value">$0</span></li>
+                      <li class="result-item">Precio sugerido final: <span id="totalPrice" class="result-value">$0</span></li>
+                  </ul>
+              </div>
+          </aside>
+      </div>        
+    </main>
 
-    <!-- Alert library -->    
-    <script src="js/sweetalert2.all.min.js"></script>
-    <!-- Customized script -->
-    <script src="js/script.js"></script>
+    <footer class="footer" id="footer">
+      <p class="legal-format">Desarrollado por Nicolas Pressello - Trabajo final para <a class="coder-link" href="https://www.coderhouse.com/">CoderHouse</a> - Ver proyecto en <a class="coder-link" href="https://github.com/npressello/simuladorPressello"> GITHUB</a></p>
+    </footer>
+  </div>
+  
+
+  <!-- Alert library -->    
+  <script src="js/sweetalert2.all.min.js"></script>
+  <!-- Customized script -->
+  <script src="js/script.js"></script>
 </body>
 </html>
