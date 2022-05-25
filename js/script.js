@@ -183,7 +183,16 @@ function simular(e) {
   guardar(cantidadIngredientesAnterior, ingredientes, porcentajeIva, porcentajeDeGanancia);
 }
 
-function cargar(btnCalcular) {
+// Carga ingredientes en el form del html segun la lista de ingredientes en memoria
+cargaIngredientes(listaIngredientes) {
+  for (let i = 0; i < listaIngredientes.length; i++) {
+    document.getElementById("productName" + (i+1)).value = listaIngredientes[i].nombre;
+    document.getElementById("productPrice" + (i+1)).value = listaIngredientes[i].precio;
+  }
+}
+
+// Carga formulario completo guardado en la ultima sesion
+function cargarSesionAnterior(btnCalcular) {
   // Cargo cantidad de ingredientes y actualizo form
   let cantIngredientes = localStorage.getItem('cantIngredientes');
   if (cantIngredientes == null) return false;
@@ -191,12 +200,9 @@ function cargar(btnCalcular) {
   actualizarCantidadIngredientes();
 
   // Cargo lista ingredientes
-  let ingredientes = JSON.parse(localStorage.getItem('listaIngredientes'));
-  for (let i = 0; i < ingredientes.length; i++) {
-    document.getElementById("productName" + (i + 1)).value = ingredientes[i].nombre;
-    document.getElementById("productPrice" + (i + 1)).value = ingredientes[i].precio;
-  }
-
+  let listaIngredientes = JSON.parse(localStorage.getItem('listaIngredientes'));
+  cargaIngredientes(listaIngredientes);
+  
   // Cargo porcentaje iva y ganancia
   let porcentajeIva = localStorage.getItem('porcentajeIva');
   document.getElementById("iva").value = porcentajeIva;
@@ -205,6 +211,13 @@ function cargar(btnCalcular) {
 
   btnCalcular.dispatchEvent(new Event("click"));
   return;
+}
+
+function llenarForm(listaIngredientes) {
+  inputCantidad = listaIngredientes.length;
+  actualizarCantidadIngredientes();
+
+  cargaIngredientes(listaIngredientes);
 }
 
 async function cargarReceta() {
@@ -219,7 +232,7 @@ async function cargarReceta() {
     console.log("Nombre: " + ingrediente.nombre + " Precio: " + ingrediente.precio);
   })
 
-  return data;
+  llenarForm(data);
 }
 
 // Puerta de entrada al programa
@@ -236,7 +249,7 @@ async function main() {
   btnCalcular.addEventListener("click", simular);
 
   // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
-  cargar(btnCalcular);
+  cargarSesionAnterior(btnCalcular);
 }
 
 main();
