@@ -214,7 +214,7 @@ function cargarSesionAnterior(btnCalcular) {
 }
 
 function llenarForm(listaIngredientes) {
-  inputCantidad = listaIngredientes.length;
+  document.getElementById("totalProducts").value = listaIngredientes.length;
   actualizarCantidadIngredientes();
 
   cargaIngredientes(listaIngredientes);
