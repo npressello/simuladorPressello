@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
   position: 'bottom',
   iconColor: 'white',
   customClass: {
-      popup: 'colored-toast'
+    popup: 'colored-toast'
   },
   showConfirmButton: false,
   timer: 1500,
@@ -67,9 +67,9 @@ function crearFormIngredienteIndividual(numero) {
   let div = document.createElement("div");
   div.className = "product-price-pair";
   div.innerHTML = `<label for="productName${numero}">Nombre de producto: </label>
-      <input type="text" name="productName${numero}" id="productName${numero}">
-      <label for="productQuantity${numero}">Precio: </label>
-      <input type="number" name="productPrice${numero}" id="productPrice${numero}" min="0">`;
+    <input type="text" name="productName${numero}" id="productName${numero}">
+    <label for="productQuantity${numero}">Precio: </label>
+    <input type="number" name="productPrice${numero}" id="productPrice${numero}" min="0">`;
   return div;
 }
 
@@ -77,8 +77,8 @@ function crearFormIngredienteIndividual(numero) {
 function actualizarCantidadIngredientes() {
   let nuevaCantidadIngredientes = parseInt(document.getElementById("totalProducts").value);
   if (nuevaCantidadIngredientes <= 0) {
-      document.getElementById("totalProducts").value = cantidadIngredientesAnterior;
-      return;
+    document.getElementById("totalProducts").value = cantidadIngredientesAnterior;
+    return;
   }
 
   let diferenciaCantidadIngredientes = nuevaCantidadIngredientes - cantidadIngredientesAnterior;
@@ -88,16 +88,16 @@ function actualizarCantidadIngredientes() {
 
   // Si la diferencia es positiva agrega inputs de ingrediente
   if (diferenciaCantidadIngredientes > 0) {
-      for (let i = cantidadIngredientesAnterior + 1; i <= nuevaCantidadIngredientes; i++) {
-          let div = crearFormIngredienteIndividual(i);
-          form.insertBefore(div, form.children[i - 1]);
-      }
+    for (let i = cantidadIngredientesAnterior + 1; i <= nuevaCantidadIngredientes; i++) {
+      let div = crearFormIngredienteIndividual(i);
+      form.insertBefore(div, form.children[i - 1]);
+    }
   } else { // Sino elimina inputs de ingredientes
-      for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
-          console.log(cantidadIngredientesAnterior);
-          console.log(nuevaCantidadIngredientes);
-          form.children[i].remove();
-      }
+    for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
+      console.log(cantidadIngredientesAnterior);
+      console.log(nuevaCantidadIngredientes);
+      form.children[i].remove();
+    }
   }
 
   cantidadIngredientesAnterior = nuevaCantidadIngredientes;
@@ -109,8 +109,8 @@ function obtenerIngredienteIndividual(inputId) {
   let nombre = document.getElementById("productName" + inputId).value;
   let precio = parseFloat(document.getElementById("productPrice" + inputId).value);
   if (!numeroCorrecto(precio)) {
-      document.getElementById("productPrice" + inputId).value = 0;
-      precio = 0;
+    document.getElementById("productPrice" + inputId).value = 0;
+    precio = 0;
   }
   const ingrediente = new Ingrediente(nombre, precio);
   return ingrediente;
@@ -121,7 +121,7 @@ function obtenerIngredientes(cantidad) {
   const ingredientes = [];
 
   for (let i = 0; i < cantidad; i++) {
-      ingredientes.push(obtenerIngredienteIndividual(i + 1));
+    ingredientes.push(obtenerIngredienteIndividual(i + 1));
   }
 
   return ingredientes;
@@ -130,8 +130,8 @@ function obtenerIngredientes(cantidad) {
 function obtenerIVA() {
   let iva = parseFloat(document.getElementById("iva").value);
   if (!numeroCorrecto(iva)) {
-      document.getElementById("iva").value = 0;
-      iva = 0;
+    document.getElementById("iva").value = 0;
+    iva = 0;
   }
   return iva;
 }
@@ -139,8 +139,8 @@ function obtenerIVA() {
 function obtenerPorcentajeGanancia() {
   let porcentaje = parseFloat(document.getElementById("profitPercent").value);
   if (!numeroCorrecto(porcentaje)) {
-      document.getElementById("profitPercent").value = 0;
-      porcentaje = 0;
+    document.getElementById("profitPercent").value = 0;
+    porcentaje = 0;
   }
   return porcentaje;
 }
@@ -155,8 +155,8 @@ async function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porce
 
 
   await Toast.fire({
-      icon: 'success',
-      title: 'Simulación guardada'
+    icon: 'success',
+    title: 'Simulación guardada'
   })
 }
 
@@ -193,8 +193,8 @@ function cargar(btnCalcular) {
   // Cargo lista ingredientes
   let ingredientes = JSON.parse(localStorage.getItem('listaIngredientes'));
   for (let i = 0; i < ingredientes.length; i++) {
-      document.getElementById("productName" + (i + 1)).value = ingredientes[i].nombre;
-      document.getElementById("productPrice" + (i + 1)).value = ingredientes[i].precio;
+    document.getElementById("productName" + (i + 1)).value = ingredientes[i].nombre;
+    document.getElementById("productPrice" + (i + 1)).value = ingredientes[i].precio;
   }
 
   // Cargo porcentaje iva y ganancia
@@ -216,7 +216,7 @@ async function cargarReceta() {
   const data = await resp.json();
 
   data.forEach((ingrediente) => {
-      console.log("Nombre: " + ingrediente.nombre + " Precio: " + ingrediente.precio);
+    console.log("Nombre: " + ingrediente.nombre + " Precio: " + ingrediente.precio);
   })
 
   return data;
