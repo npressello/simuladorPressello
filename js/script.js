@@ -184,7 +184,7 @@ function simular(e) {
 }
 
 // Carga ingredientes en el form del html segun la lista de ingredientes en memoria
-cargaIngredientes(listaIngredientes) {
+function cargaIngredientes(listaIngredientes) {
   for (let i = 0; i < listaIngredientes.length; i++) {
     document.getElementById("productName" + (i+1)).value = listaIngredientes[i].nombre;
     document.getElementById("productPrice" + (i+1)).value = listaIngredientes[i].precio;
