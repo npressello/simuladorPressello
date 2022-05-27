@@ -248,6 +248,14 @@ async function main() {
   let btnCalcular = document.getElementById("btnCalculate");
   btnCalcular.addEventListener("click", simular);
 
+  // Botones header
+  let navLinks = document.getElementsByClassName("main-nav-link");
+  let contactLink = navLinks[2];
+  contactLink.addEventListener("click", () => {
+    let footerSection = document.getElementsByTagName("footer")[0];
+    footerSection.classList.add('footer-highlight');
+  });
+
   // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
   cargarSesionAnterior(btnCalcular);
 }

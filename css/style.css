@@ -133,6 +133,11 @@
   text-align: center;
 }
 
+.footer-highlight {
+  border: 2px solid red;
+  transition: 0.5s;
+}
+
 .coder-link {
   padding: 0.25rem 0.75rem;
   color: white;
