@@ -133,6 +133,22 @@
   text-align: center;
 }
 
+@keyframes border_fx {
+  0% {border: 0px solid red;}
+  25% {border: 5px solid red;}
+  50% {border: 10px solid red;}
+  75% {border: 5px solid red;}
+  100% {border: 0px solid red;}
+}
+
+.animation-highlight {
+  border: 0px solid red;
+  animation-name: border_fx;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+}
+
 .coder-link {
   padding: 0.25rem 0.75rem;
   color: white;

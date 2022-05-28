@@ -1,0 +1,11 @@
+{
+  "name": "simuladorpressello",
+  "version": "1.0.0",
+  "description": "Simulador de precio sugerido para un producto en base a ingredientes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
