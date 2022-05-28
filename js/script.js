@@ -213,6 +213,7 @@ function cargarSesionAnterior(btnCalcular) {
   return;
 }
 
+// Llena el form de la receta cargada a partir del archivo json
 function llenarForm(listaIngredientes) {
   document.getElementById("totalProducts").value = listaIngredientes.length;
   actualizarCantidadIngredientes();
@@ -220,6 +221,7 @@ function llenarForm(listaIngredientes) {
   cargaIngredientes(listaIngredientes);
 }
 
+// Carga una receta de un archivo json en el form al elegir por el menu desplegable
 async function cargarReceta() {
   let nombreReceta = document.getElementById("recipes").value.toLowerCase();
   let url = 'https://preciosugerido.netlify.app/data/' + nombreReceta + '.json';
@@ -233,6 +235,19 @@ async function cargarReceta() {
   })
 
   llenarForm(data);
+}
+
+function animarSeccion(nombreSeccion, nombreClase) {
+  let seccion = document.getElementsByTagName(nombreSeccion)[0];
+  seccion.classList.add(nombreClase);
+  let animado = false;
+  let timer = setInterval(() => {
+    if (animado) {
+      seccion.classList.remove(nombreClase);
+      clearInterval(timer);
+    }
+    animado = true;
+  }, 1000); // duracion de animacion de 1 segundo
 }
 
 // Puerta de entrada al programa
@@ -250,10 +265,17 @@ async function main() {
 
   // Botones header
   let navLinks = document.getElementsByClassName("main-nav-link");
+  let homeLink = navLinks[0];
+  let simLink = navLinks[1];
   let contactLink = navLinks[2];
-  contactLink.addEventListener("click", () => {
-    let footerSection = document.getElementsByTagName("footer")[0];
-    footerSection.classList.add('footer-highlight');
+  homeLink.addEventListener("click", function() {
+    animarSeccion("header", "animation-highlight");
+  });
+  simLink.addEventListener("click", function() {
+    animarSeccion("main", "animation-highlight");
+  });
+  contactLink.addEventListener("click", function() {
+    animarSeccion("footer", "animation-highlight");
   });
 
   // Carga datos de localStorage, si existen, entonces hace una simulacion inmediate
