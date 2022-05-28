@@ -1,0 +1,8 @@
+[
+  {"nombre": "Galletas Chocolinas", "precio": 320, "cantidad": 2, "unidad": "unidad", "id": 1},
+  {"nombre": "Crema mascarpone", "precio": 450, "cantidad": 600, "unidad": "gramo", "id": 2},
+  {"nombre": "Dulce de leche", "precio": 180, "cantidad": 600, "unidad": "gramo", "id": 3},
+  {"nombre": "Cafe soluble", "precio": 56, "cantidad": 2, "unidad": "cucharadas", "id": 4},
+  {"nombre": "Agua caliente", "precio": 20, "cantidad": 200, "unidad": "mililitros", "id": 5},
+  {"nombre": "Chocolate", "precio": 305, "cantidad": 90, "unidad": "gramo", "id": 6}
+]
