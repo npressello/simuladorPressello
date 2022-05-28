@@ -94,8 +94,6 @@ function actualizarCantidadIngredientes() {
     }
   } else { // Sino elimina inputs de ingredientes
     for (let i = cantidadIngredientesAnterior - 1; i > nuevaCantidadIngredientes - 1; i--) {
-      console.log(cantidadIngredientesAnterior);
-      console.log(nuevaCantidadIngredientes);
       form.children[i].remove();
     }
   }
