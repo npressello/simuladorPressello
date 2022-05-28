@@ -157,7 +157,7 @@ async function guardar(cantIngredientes, listaIngredientes, porcentajeIva, porce
   await Toast.fire({
     icon: 'success',
     title: 'Simulación guardada'
-  })
+  });
 }
 
 // Funcion principal de simulacion
@@ -209,37 +209,47 @@ function cargarSesionAnterior(btnCalcular) {
   let porcentajeDeGanancia = localStorage.getItem('porcentajeDeGanancia');
   document.getElementById("profitPercent").value = porcentajeDeGanancia;
 
+  // Una vez cargada la sesion dispara el evento para calcular la simulacion
   btnCalcular.dispatchEvent(new Event("click"));
   return;
 }
 
 // Llena el form de la receta cargada a partir del archivo json
 function llenarForm(listaIngredientes) {
+  // Primero actuaiza la cantidad de ingredientes del form
   document.getElementById("totalProducts").value = listaIngredientes.length;
   actualizarCantidadIngredientes();
 
+  // Luego carga la lista de ingredientes
   cargaIngredientes(listaIngredientes);
 }
 
 // Carga una receta de un archivo json en el form al elegir por el menu desplegable
-async function cargarReceta() {
+async function cargarReceta(e) {
+  e.preventDefault();
+
+  // Segun la opcion de receta elegida, selecciona la ruta
   let nombreReceta = document.getElementById("recipes").value.toLowerCase();
   let url = 'https://preciosugerido.netlify.app/data/' + nombreReceta + '.json';
-  console.log(url);
 
+  // Realiza un fetch de los datos del json
   const resp = await fetch(url);
   const data = await resp.json();
 
-  data.forEach((ingrediente) => {
-    console.log("Nombre: " + ingrediente.nombre + " Precio: " + ingrediente.precio);
-  })
-
+  // Llena el form con la cantidad de ingredientes y los datos de cada uno
   llenarForm(data);
 }
 
+// Realizar una animacion -Bordes- a la seccion elegida -Header, Main, Footer-
 function animarSeccion(nombreSeccion, nombreClase) {
+  // Selecciona la seccion a animar
   let seccion = document.getElementsByTagName(nombreSeccion)[0];
+  
+  // Agrega la clase con el efecto deseado, en este caso un borde rojo que se agranda y achica
   seccion.classList.add(nombreClase);
+
+  // Comienza con un flag de animado desactivado
+  // A partir de un timer, se genera un intervalo de 1 segundo en el que activa y desactiva la animacion
   let animado = false;
   let timer = setInterval(() => {
     if (animado) {
